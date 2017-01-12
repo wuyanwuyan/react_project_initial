@@ -9,35 +9,36 @@ const SRC_PATH = path.resolve(ROOT_PATH, 'src')
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist')
 const MODULE_PATH = path.resolve(ROOT_PATH, 'node_modules')
 
+console.log(__dirname,ROOT_PATH,SRC_PATH,DIST_PATH,MODULE_PATH)
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+var OpenBrowserPlugin = require('open-browser-webpack-plugin'); //自动打开浏览器插件
 
-var mainPageChunks = ["libs", "pageIndex/mainPage"];
+var indexPage = ["libs", "pageIndex/mainPage"];
 var mainPageHtmlConfig = {
-    favicon : './assets/logo.ico',
+    favicon : './assets/favicon.ico',
     template: 'index.html',    //html模板路径
     filename: 'index.html',
     showErrors : false,
     inject: true,    //允许插件修改哪些内容，包括head与body
     // hash: true,    //为静态资源生成hash值
-    chunks: mainPageChunks,
+    chunks: indexPage,
     chunksSortMode: function (a, b) {
-        return mainPageChunks.indexOf(a.names[0]) - mainPageChunks.indexOf(b.names[0]);
+        return indexPage.indexOf(a.names[0]) - indexPage.indexOf(b.names[0]);
     }
 }
 
 module.exports = {
     context: SRC_PATH,
     entry: {
-        "libs": ['jquery', 'bootstrap', 'ztree'],
         "pageIndex/mainPage": './js/main/index'
     },
     output: {
         path: DIST_PATH,
         filename: 'js/[name].js',    //'js/[name].[chunkhash].js',
         publicPath: "/",     //webpack-dev-server访问的路径 publicPath是为webpack-dev-server所使用
-        // ,chunkFilename: "chunk.[name].js"
     },
     plugins: [
         new HtmlWebpackPlugin(mainPageHtmlConfig),
@@ -46,7 +47,8 @@ module.exports = {
             // jQuery: 'jquery'
             // WdatePicker : 'WdatePicker'
         }),
-        new ExtractTextPlugin("css/[name].css")
+        new ExtractTextPlugin("css/[name].css"),
+        new OpenBrowserPlugin({url: 'http://localhost:8080'})
         // new webpack.HotModuleReplacementPlugin()
         // ,new HtmlWebpackPlugin()
         // ,new webpack.optimize.CommonsChunkPlugin(
@@ -59,6 +61,15 @@ module.exports = {
         // noParse : ["WdatePicker"],
         loaders: [
             // {test: /\.css$/, loader: 'style!css'},   // 将CSS一起打包进js文件
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015'],
+                    plugins: ['transform-runtime']
+                }
+            },
             {
                 test: /\.(png|jpg|gif|svg|ico)$/,
                 loader: 'url?limit=8192&name=assets/[name].[ext]'
