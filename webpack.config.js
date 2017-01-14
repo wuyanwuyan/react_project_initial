@@ -16,59 +16,37 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var OpenBrowserPlugin = require('open-browser-webpack-plugin'); //自动打开浏览器插件
 
-var indexPage = ["libs", "pageIndex/mainPage"];
-var mainPageHtmlConfig = {
-    favicon : './assets/favicon.ico',
-    template: 'index.html',    //html模板路径
-    filename: 'index.html',
+var indexHtmlConfig = {
+    favicon : path.resolve(SRC_PATH, 'assets/favicon.ico'),
+    template: path.resolve(SRC_PATH, 'index.html'),    //html模板路径
+    filename : 'index.html',
     showErrors : false,
     inject: true,    //允许插件修改哪些内容，包括head与body
-    // hash: true,    //为静态资源生成hash值
-    chunks: indexPage,
-    chunksSortMode: function (a, b) {
-        return indexPage.indexOf(a.names[0]) - indexPage.indexOf(b.names[0]);
-    }
+    hash: false    //为静态资源生成hash值
 }
 
 module.exports = {
-    context: SRC_PATH,
+    // context: SRC_PATH,
+    // 配置服务器
     entry: {
-        "pageIndex/mainPage": './js/main/index'
+        "index": path.resolve(SRC_PATH, 'main.js')
     },
     output: {
         path: DIST_PATH,
         filename: 'js/[name].js',    //'js/[name].[chunkhash].js',
-        publicPath: "/",     //webpack-dev-server访问的路径 publicPath是为webpack-dev-server所使用
+        publicPath: './',//webpack-dev-server访问的路径 publicPath是为webpack-dev-server所使用
     },
     plugins: [
-        new HtmlWebpackPlugin(mainPageHtmlConfig),
-        new webpack.ProvidePlugin({
-            // $: 'jquery',    // 会被打包进entry里面
-            // jQuery: 'jquery'
-            // WdatePicker : 'WdatePicker'
-        }),
+       new HtmlWebpackPlugin(indexHtmlConfig),
         new ExtractTextPlugin("css/[name].css"),
         new OpenBrowserPlugin({url: 'http://localhost:8080'})
-        // new webpack.HotModuleReplacementPlugin()
-        // ,new HtmlWebpackPlugin()
-        // ,new webpack.optimize.CommonsChunkPlugin(
-        //     {name:'commonHelllo',chunks:['libs']})  // // 用于多个HTML页面的时候，默认会把所有入口节点的公共代码提取出来,生成一个common.js ，必须遵循commonJS吗？
-        //  { minChunks: 3,
-        //      name: "common-app.chunk",
-        //      chunks: ["home", "detail", "list"]}
     ],
     module: {
-        // noParse : ["WdatePicker"],
         loaders: [
-            // {test: /\.css$/, loader: 'style!css'},   // 将CSS一起打包进js文件
             {
                 test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015'],
-                    plugins: ['transform-runtime']
-                }
+                exclude: /(node_modules)/,
+                loader: 'babel-loader'
             },
             {
                 test: /\.(png|jpg|gif|svg|ico)$/,
@@ -89,12 +67,9 @@ module.exports = {
             }
         ]
     },
-    resolveLoader: {
-        // root: path.join(__dirname, dev)
-    },
     resolve: {
         root: [SRC_PATH, MODULE_PATH],
-        extensions: ['.js', ''],
+        extensions: ['','.js', 'jsx'],
         alias: {  // 别名，提高搜索效率，打包效率
 
         }

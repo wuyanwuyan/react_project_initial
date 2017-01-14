@@ -1,3 +1,12 @@
-/**
- * Created by Claude on 2017/1/13.
- */
+import React from 'react';
+import {Link, IndexLink} from 'react-router';
+
+export default class Article extends React.Component {
+    render() {
+        return (
+            <div>
+                Article
+            </div>
+        );
+    }
+}
