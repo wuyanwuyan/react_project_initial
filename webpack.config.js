@@ -34,12 +34,12 @@ module.exports = {
     output: {
         path: DIST_PATH,
         filename: 'js/[name].js',    //'js/[name].[chunkhash].js',
-        publicPath: './',//webpack-dev-server访问的路径 publicPath是为webpack-dev-server所使用
+        publicPath: './dist',//webpack-dev-server访问的路径 publicPath是为webpack-dev-server所使用
     },
     plugins: [
        new HtmlWebpackPlugin(indexHtmlConfig),
-        new ExtractTextPlugin("css/[name].css"),
-        new OpenBrowserPlugin({url: 'http://localhost:8080'})
+        new ExtractTextPlugin("css/[name].css")
+        // new OpenBrowserPlugin({url: 'http://localhost:8080'})
     ],
     module: {
         loaders: [
@@ -77,7 +77,9 @@ module.exports = {
     // externals: {
     //     'jquery': 'jquery' //  需要在HTML文件里用<script>标签引入
     // },
+    debug: true,
     devtool: 'source-map'
+
 }
 
 
