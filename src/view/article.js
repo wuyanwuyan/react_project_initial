@@ -5,7 +5,7 @@ export default class Article extends React.Component {
     render() {
         return (
             <div>
-                Article
+                Article11
             </div>
         );
     }

@@ -1,52 +1,54 @@
-var ENV = 'dev'
-
 var webpack = require('webpack')
 var path = require('path')
-
-
-const ROOT_PATH = path.resolve(__dirname)
-const SRC_PATH = path.resolve(ROOT_PATH, 'src')
-const DIST_PATH = path.resolve(ROOT_PATH, 'dist')
-const MODULE_PATH = path.resolve(ROOT_PATH, 'node_modules')
-
-console.log(__dirname,ROOT_PATH,SRC_PATH,DIST_PATH,MODULE_PATH)
-
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
-var OpenBrowserPlugin = require('open-browser-webpack-plugin'); //自动打开浏览器插件
+
+const ROOT_PATH = path.resolve(__dirname)
+const SRC_PATH = path.resolve(ROOT_PATH, 'src')
+const BUILD_PATH = path.resolve(ROOT_PATH, 'build')
+const MODULE_PATH = path.resolve(ROOT_PATH, 'node_modules')
+
+var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
 
 var indexHtmlConfig = {
-    favicon : path.resolve(SRC_PATH, 'assets/favicon.ico'),
+    favicon: path.resolve(SRC_PATH, 'assets/favicon.ico'),
     template: path.resolve(SRC_PATH, 'index.html'),    //html模板路径
-    filename : 'index.html',
-    showErrors : false,
+    filename: 'index.html',
     inject: true,    //允许插件修改哪些内容，包括head与body
     hash: false    //为静态资源生成hash值
 }
 
 module.exports = {
-    // context: SRC_PATH,
-    // 配置服务器
     entry: {
-        "index": path.resolve(SRC_PATH, 'main.js')
+        vendor: ['react', 'react-dom','redux','react-redux','react-router'],  // 不经常改变的模块提取到一个js文件
+        main: [hotMiddlewareScript, path.resolve(SRC_PATH, 'main.js')],
     },
     output: {
-        path: DIST_PATH,
-        filename: 'js/[name].js',    //'js/[name].[chunkhash].js',
-        publicPath: './dist',//webpack-dev-server访问的路径 publicPath是为webpack-dev-server所使用
+        path: BUILD_PATH,
+        filename: 'js/[name].js',
+        publicPath: "/"
     },
     plugins: [
-       new HtmlWebpackPlugin(indexHtmlConfig),
-        new ExtractTextPlugin("css/[name].css")
-        // new OpenBrowserPlugin({url: 'http://localhost:8080'})
+        new HtmlWebpackPlugin(indexHtmlConfig),
+        new ExtractTextPlugin("css/[name].css"),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['vendor']
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ],
     module: {
         loaders: [
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                query:{
+                    presets: [ "es2015", "stage-0", "react"],
+                    plugins: ["transform-runtime"],
+                    cacheDirectory : true
+                }
             },
             {
                 test: /\.(png|jpg|gif|svg|ico)$/,
@@ -69,7 +71,7 @@ module.exports = {
     },
     resolve: {
         root: [SRC_PATH, MODULE_PATH],
-        extensions: ['','.js', 'jsx'],
+        extensions: ['', '.js', 'jsx'],
         alias: {  // 别名，提高搜索效率，打包效率
 
         }
@@ -77,7 +79,6 @@ module.exports = {
     // externals: {
     //     'jquery': 'jquery' //  需要在HTML文件里用<script>标签引入
     // },
-    debug: true,
     devtool: 'source-map'
 
 }
