@@ -21,7 +21,7 @@ var indexHtmlConfig = {
 
 module.exports = {
     entry: {
-        vendor: ['react', 'react-dom','redux','react-redux','react-router'],  // 不经常改变的模块提取到一个js文件
+        vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router'],  // 不经常改变的模块提取到一个js文件
         main: [hotMiddlewareScript, path.resolve(SRC_PATH, 'main.js')],
     },
     output: {
@@ -44,19 +44,21 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
                 loader: 'babel-loader',
-                query:{
-                    presets: [ "es2015", "stage-0", "react"],
+                query: {
+                    presets: ["es2015", "stage-0", "react"],
                     plugins: ["transform-runtime"],
-                    cacheDirectory : true
+                    cacheDirectory: true
                 }
             },
             {
                 test: /\.(png|jpg|gif|svg|ico)$/,
                 loader: 'url?limit=8192&name=assets/[name].[ext]'
             },  ////图片文件使用 url-loader 来处理，小于8kb的直接转为base64
-            {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},  // 将CSS文件提取出来
-            // { test: require.resolve('jquery'), loader: 'expose?jQuery!expose?$' },    //从 npm 模块中将 jquery 挂载到全局
-            // {test: require.resolve('bootstrap'), loader: 'expose?bootstrap'}    //将bootstrap暴露到全局
+            {
+                test: /\.(scss|css)$/,
+                loader: ExtractTextPlugin.extract("style", ["css?sourceMap","postcss","sass?sourceMap"])  //加载异步chunk，无法抽取css时，就使用style-loader，将其嵌入到页面的style标签
+                // loaders: ["style-loader", "css-loader?sourceMap","postcss", "sass-loader?sourceMap"]   // 需要CSS modules？
+            },  // 将CSS文件提取出来
             {
                 test: /\.woff/,
                 loader: 'url?prefix=font/&limit=10000&mimetype=application/font-woff&name=assets/[name].[ext]'
@@ -76,6 +78,9 @@ module.exports = {
 
         }
     },
+    postcss: [
+        require('autoprefixer')()
+    ],
     // externals: {
     //     'jquery': 'jquery' //  需要在HTML文件里用<script>标签引入
     // },

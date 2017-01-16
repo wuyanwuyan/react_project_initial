@@ -15,7 +15,7 @@ var indexHtmlConfig = {
     filename: 'index.html',
     showErrors: false,
     inject: true,    //允许插件修改哪些内容，包括head与body
-    hash: true    //为静态资源生成hash值
+    hash: false    //为静态资源生成hash值 url后面？+hash
 }
 
 const CDN_URL = "/";//http://localhost:8080";
@@ -60,8 +60,8 @@ module.exports = {
                 loader: 'url?limit=8192&name=assets/[name].[hash].[ext]'
             },  ////图片文件使用 url-loader 来处理，小于8kb的直接转为base64
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")  // 将CSS文件提取出来
+                test: /\.(scss|css)$/,
+                loader: ExtractTextPlugin.extract("style", ["css","postcss","sass"])
             },
             {
                 test: /\.woff/,
@@ -81,7 +81,10 @@ module.exports = {
         alias: {  // 别名，提高搜索效率，打包效率
 
         }
-    }
+    },
+    postcss: [
+        require('autoprefixer')()
+    ]
 
 }
 

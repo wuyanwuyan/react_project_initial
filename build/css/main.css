@@ -1,0 +1,31 @@
+html {
+  box-sizing: border-box;
+  box-shadow: #343d46; }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit; }
+
+div {
+  color: #ffff4f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+._3ClA9Qhu3BQhnz2HqUIzVH ._3ajsYel_EzF-fxq47j9GY0 {
+  height: 12px; }
+
+._3ClA9Qhu3BQhnz2HqUIzVH ._18IPeT5UBMt3YD6cyxDpgU {
+  width: 16px; }
+._1ENNgSTh4PhBJbW68yHMAA {
+  box-shadow: #ffff4f;
+  color: black; }
+
+/*# sourceMappingURL=main.css.map*/

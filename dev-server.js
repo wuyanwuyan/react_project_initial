@@ -13,7 +13,6 @@ var webpackDevOptions = {
     headers: {
         'Access-Control-Allow-Origin': '*'
     },
-    contentBase: 'src',
     stats: {
         colors: true,
         hash: false

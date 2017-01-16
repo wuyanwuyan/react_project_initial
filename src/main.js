@@ -1,3 +1,6 @@
+// CSS
+import "./main.scss";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -15,6 +18,7 @@ import reducer from './redux/reducer';
 import IndexView from "./view/IndexView";
 import Recommend from "./view/Recommend";
 import Article from "./view/Article";
+
 
 // 配置整体组件
 class Init extends React.Component {
