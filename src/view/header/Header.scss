@@ -1,0 +1,11 @@
+:local(.logo){
+  margin-top: 2px;
+}
+
+:local(.icon){
+  float: right;
+  margin-top: 5px;
+  &:hover{
+    cursor: pointer;
+  }
+}

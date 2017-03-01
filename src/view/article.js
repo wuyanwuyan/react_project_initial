@@ -1,5 +1,4 @@
 import React from 'react';
-import style from '../components/article.scss'
 import {Link, IndexLink} from 'react-router';
 
 import classNames from 'classnames';

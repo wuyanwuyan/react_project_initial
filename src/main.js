@@ -12,13 +12,8 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './redux/reducer';
 
-// 引入公用样式
-
 // 引入单个页面（包括嵌套的子页面）
-import IndexView from "./view/IndexView";
-import Recommend from "./view/Recommend";
-import Article from "./view/Article";
-
+import Header from "./view/header/Header";
 
 // 配置整体组件
 class Init extends React.Component {
@@ -29,6 +24,7 @@ class Init extends React.Component {
     render() {
         return (
             <div>
+                <Header />
                 {this.props.children}
             </div>
         )
@@ -36,7 +32,7 @@ class Init extends React.Component {
 }
 
 let initState = {
-    testInfo: "helloooo454ooooo"
+    testInfo: "hellos"
 }
 let store = createStore(reducer, initState);
 
@@ -45,9 +41,7 @@ ReactDOM.render((
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Init}>
-                <IndexRoute component={IndexView}/>
-                <Route path="recommend" component={Recommend}/>
-                <Route path="article" component={Article}/>
+
             </Route>
         </Router>
     </ Provider >

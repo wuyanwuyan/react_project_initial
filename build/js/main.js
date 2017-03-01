@@ -2967,7 +2967,6 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"div1":"_3ClA9Qhu3BQhnz2HqUIzVH","span1":"_3ajsYel_EzF-fxq47j9GY0","div2":"_18IPeT5UBMt3YD6cyxDpgU"};
 
 /***/ },
 /* 103 */,
@@ -3493,9 +3492,15 @@ webpackJsonp([0],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	__webpack_require__(381);
+	var _article = __webpack_require__(381);
+	
+	var _article2 = _interopRequireDefault(_article);
 	
 	var _reactRouter = __webpack_require__(283);
+	
+	var _classnames = __webpack_require__(383);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -3510,9 +3515,10 @@ webpackJsonp([0],[
 	    (0, _createClass3.default)(Article, [{
 	        key: 'render',
 	        value: function render() {
+	            var className = (0, _classnames2.default)(_article2.default.title, "article");
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'article' },
+	                { className: className },
 	                'Article11'
 	            );
 	        }
@@ -3527,7 +3533,62 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"article":"_1ENNgSTh4PhBJbW68yHMAA"};
+	module.exports = {"title":"_1BnwlpWPJ5NBjf945AGTC2"};
+
+/***/ },
+/* 382 */,
+/* 383 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
 
 /***/ }
 ]);

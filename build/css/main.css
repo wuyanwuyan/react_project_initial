@@ -19,13 +19,20 @@ div {
   display: -ms-flexbox;
   display: flex; }
 
-._3ClA9Qhu3BQhnz2HqUIzVH ._3ajsYel_EzF-fxq47j9GY0 {
+.div1 .span1 {
   height: 12px; }
 
-._3ClA9Qhu3BQhnz2HqUIzVH ._18IPeT5UBMt3YD6cyxDpgU {
+.div1 .div2 {
   width: 16px; }
-._1ENNgSTh4PhBJbW68yHMAA {
+.article {
+  font-size: 6em;
   box-shadow: #ffff4f;
   color: black; }
+
+._1BnwlpWPJ5NBjf945AGTC2 {
+  color: black; }
+
+.hello {
+  font-size: 6em; }
 
 /*# sourceMappingURL=main.css.map*/

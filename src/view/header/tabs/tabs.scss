@@ -1,0 +1,50 @@
+$tabHeight: 35px;
+.tab-title-item {
+  display: inline-block;
+  height: $tabHeight;
+  line-height: $tabHeight;
+  color: #333;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-left: none;
+
+  &:hover{
+    cursor: pointer;
+  }
+
+  &:last-child{
+    border-right: none;
+  }
+
+  &.active {
+    background-color: #03a7ca;
+    color: #fff;
+  }
+
+  &.active:after {
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #03a7ca;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+}
+
+.tab-content-item {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 30px;
+  color: #2e6da4;
+}
+
+.tab-content-item.active {
+  display: block;
+}
