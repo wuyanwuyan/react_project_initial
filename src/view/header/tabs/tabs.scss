@@ -1,5 +1,5 @@
 $tabHeight: 35px;
-.tab-title-item {
+:local(.tab_title_item) {
   display: inline-block;
   height: $tabHeight;
   line-height: $tabHeight;
@@ -37,14 +37,13 @@ $tabHeight: 35px;
   }
 }
 
-.tab-content-item {
+:local(.tab_content_item) {
   display: none;
   text-align: center;
   margin-top: 20px;
   font-size: 30px;
-  color: #2e6da4;
-}
-
-.tab-content-item.active {
-  display: block;
+  color: red;
+  &.active{
+    display: block;
+  }
 }

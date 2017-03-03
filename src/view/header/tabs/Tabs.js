@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import './tabs.scss';
+import style from './tabs.scss';
 export class Tabs extends React.Component {
     constructor(props) {
         super(props);
@@ -10,11 +10,15 @@ export class Tabs extends React.Component {
     }
 
     getTitleItemCssClasses = (index) => {
-        return index === this.state.currentIndex ? "tab-title-item active" : "tab-title-item";
+        var activeClassName = classNames(style.tab_title_item,"active");
+        var className = classNames(style.tab_title_item);
+        return index === this.state.currentIndex ? activeClassName : className;
     }
 
     getContentItemCssClasses = (index) => {
-        return index === this.state.currentIndex ? "tab-content-item active" : "tab-content-item";
+        var activeClassName = classNames(style.tab_content_item,"active");
+        var className = classNames(style.tab_content_item);
+        return index === this.state.currentIndex ? activeClassName : className;
     }
 
     onClickTab(index) {
