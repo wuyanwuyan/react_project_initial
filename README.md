@@ -23,3 +23,7 @@ react项目工程，类似于脚手架，可以用于前期快速开始新项目
 - yarn的问题
   - 旧版本的yarn，install的过程，node-sass会一直安装错误，可以使用`npm rebuild node-sass`解决，推荐使用最新版本的yarn v0.21.3。
   - 如果yarn install太慢或者失败，尝试使用国内镜像`yarn config set registry https://registry.npm.taobao.org`
+
+## Preview
+
+ ![example preview](https://github.com/wuyanwuyan/react_project_initial/blob/master/preview/preview.gif)
