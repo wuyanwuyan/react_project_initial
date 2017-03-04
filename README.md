@@ -13,7 +13,7 @@ react项目工程，类似于脚手架，可以用于前期快速开始新项目
 
 3. npm script.
 
-    * `npm start` 正常启动项目，使用express做后台.
+    * `start` 正常启动项目，使用express做后台.
     * `dev:build` 开发过程中，webpack热更新，修改主动构建，是在内存中进行的，如果你想看看生成的具体文件，运行这个script.
     * `dev-hot` 使用webpack自带的Hot module load，不使用自定义的dev-server
     * `production` 生成最终的发布文件
