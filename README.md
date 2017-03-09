@@ -1,6 +1,6 @@
 #  react 初始项目工程
 
-react项目工程，类似于脚手架，可以用于前期快速开始新项目，综合使用了react技术栈，包括react，redux，react-router，Express结合Webpack的全自动刷新HMR，sass，etc.
+   react项目工程，类似于脚手架，可以用于前期快速开始新项目，综合使用了react技术栈，包括react，redux，react-router，Express结合Webpack的全自动刷新HMR，sass，etc.
 
 ## 启动
 
