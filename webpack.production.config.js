@@ -10,7 +10,6 @@ const DIST_PATH = path.resolve(ROOT_PATH, 'dist')
 const MODULE_PATH = path.resolve(ROOT_PATH, 'node_modules')
 
 var indexHtmlConfig = {
-    favicon: path.resolve(SRC_PATH, 'assets/favicon.ico'),
     template: path.resolve(SRC_PATH, 'index.html'),    //html模板路径
     filename: 'index.html',
     showErrors: false,
@@ -18,7 +17,7 @@ var indexHtmlConfig = {
     hash: false    //为静态资源生成hash值 url后面？+hash
 }
 
-const CDN_URL = "/";//http://localhost:8080";
+const CDN_URL = "./";//http://localhost:8080";
 
 module.exports = {
     entry: {

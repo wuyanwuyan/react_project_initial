@@ -9,10 +9,10 @@ const SRC_PATH = path.resolve(ROOT_PATH, 'src')
 const BUILD_PATH = path.resolve(ROOT_PATH, 'build')
 const MODULE_PATH = path.resolve(ROOT_PATH, 'node_modules')
 
-var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
+var hotMiddlewareScript = 'webpack-hot-middlewa' +
+    're/client?reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
 
 var indexHtmlConfig = {
-    favicon: path.resolve(SRC_PATH, 'assets/favicon.ico'),
     template: path.resolve(SRC_PATH, 'index.html'),    //html模板路径
     filename: 'index.html',
     inject: true,    //允许插件修改哪些内容，包括head与body

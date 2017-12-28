@@ -1,0 +1,29 @@
+.menuButtom {
+  width: 100%;
+  height: 30px;
+  color: blue;
+  position: relative;
+  text-align: center;
+
+}
+
+.menuButtom_item_container {
+
+}
+
+.menuItem {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 2;
+  transition: all 0.3s ease;
+
+  .active {
+
+  }
+
+}
+
