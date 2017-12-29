@@ -11,6 +11,8 @@ export default class Chart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            timeDataArr:[],
+
             market:getUrlParam('market') || 'binance',
             symbol:getUrlParam('symbol') || 'BTC_USDT',
             interval:'',
@@ -44,7 +46,7 @@ export default class Chart extends React.Component {
         fetchGet('/exchange/exists_kline', {market}).then(isExist => {
             return isExist ? fetchGet(`/exchange/kline_interval/${decodeURIComponent(market)}`) : Promise.reject();
         }).then(timeData => {
-            let timeDataArr = timeData.slice(0, 5);
+            let timeDataArr = timeData;
             let interval = timeDataArr[0];
 
             this.setState({timeDataArr, interval});
@@ -112,7 +114,7 @@ export default class Chart extends React.Component {
             },
 
             scrollbar:{
-                // enabled: false
+                enabled: false,
                 liveRedraw:true,
             },
 
@@ -188,11 +190,18 @@ export default class Chart extends React.Component {
         });
     }
 
+    select = (item) =>{
+        this.setState({interval:item},()=>{
+            this._fetchChartData();
+        });
+    }
+
     render() {
+        const {timeDataArr,interval} = this.state;
         return (
             <div id="container">
                 <div id="menu">
-                    <MenuButton text='M1'/>
+                    <MenuButton text={interval} option={timeDataArr} select={this.select}/>
                 </div>
                 <div id="chartContainer" ref={r => this.chart = r}></div>
             </div>

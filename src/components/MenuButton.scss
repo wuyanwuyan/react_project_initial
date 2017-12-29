@@ -12,17 +12,22 @@
 }
 
 .menuItem {
-  width: 100px;
-  height: 100px;
-  background-color: red;
+  width: 300px;
+  background-color: gray;
   position: absolute;
   top: 0;
   left: 100%;
   z-index: 2;
   transition: all 0.3s ease;
+  display: flex;
+  flex-wrap: wrap;
 
   .active {
+    color: #0070ff;
+  }
 
+  > div {
+    flex-basis: 33%;
   }
 
 }
