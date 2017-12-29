@@ -111,9 +111,10 @@ export default class Chart extends React.Component {
                 enabled: false
             },
 
-            // scrollbar:{
-            //     enabled: false
-            // },
+            scrollbar:{
+                // enabled: false
+                liveRedraw:true,
+            },
 
             credits: {
                 enabled: false
